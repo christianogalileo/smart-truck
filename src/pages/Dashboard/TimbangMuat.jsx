@@ -56,7 +56,7 @@ const TimbangMuat = () => {
     };
 
     try {
-      await axios.post('http://localhost:5000/api/loadings', payload);
+      await axios.post('http://38.147.122.240:5000/api/loadings', payload);
       alert("Data tara berhasil disimpan!");
       setForm({ itemType: '', quantity: '', tara: '' });
       fetchTimbangMuat(rfid);
@@ -68,7 +68,7 @@ const TimbangMuat = () => {
 
   const fetchTimbangMuat = async (truckId) => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/loadings/${truckId}`);
+      const res = await axios.get(`http://38.147.122.240:5000/api/loadings/${truckId}`);
       setTimbangMuatList(res.data);
     } catch (err) {
       console.error(err);

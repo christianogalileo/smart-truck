@@ -46,7 +46,7 @@ const TimbangGudang = () => {
   const fetchTimbangMuat = async (truckId) => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/loadings/${truckId}`
+        `http://38.147.122.240:5000/api/loadings/${truckId}`
       );
       setTimbangMuatList(res.data);
     } catch (err) {
@@ -74,7 +74,7 @@ const TimbangGudang = () => {
     try {
       setSubmitting(true);
       const res = await axios.put(
-        `http://localhost:5000/api/loadings/${id}/brutto`,
+        `http://38.147.122.240:5000/api/loadings/${id}/brutto`,
         { bruto: brutoVal }
       );
       alert(res.data.message || "Data brutto & netto berhasil disimpan!");

@@ -32,7 +32,7 @@ const InfoDriverDetail = () => {
 
         // Fetch loadings
         const resLoadings = await fetch(
-          `http://localhost:5000/api/loadings/${encodeURIComponent(truckId)}`
+          `http://38.147.122.240:5000/api/loadings/${encodeURIComponent(truckId)}`
         );
         if (!resLoadings.ok) throw new Error("Gagal mengambil data timbang muat");
         const loadingData = await resLoadings.json();
@@ -50,7 +50,7 @@ const InfoDriverDetail = () => {
   // Export Excel untuk 1 truck
   const handleExportExcel = () => {
     if (truck?.truckId) {
-      const url = `http://localhost:5000/api/export/truck/${encodeURIComponent(
+      const url = `http://38.147.122.240:5000/api/export/truck/${encodeURIComponent(
         truck.truckId
       )}/excel`; // <-- pakai /excel
       window.open(url, "_blank");
@@ -62,7 +62,7 @@ const InfoDriverDetail = () => {
   // Export PDF untuk 1 truck
   const handleExportPDF = () => {
     if (truck?.truckId) {
-      const url = `http://localhost:5000/api/export/truck/${encodeURIComponent(
+      const url = `http://38.147.122.240:5000/api/export/truck/${encodeURIComponent(
         truck.truckId
       )}/pdf`;
       window.open(url, "_blank");
@@ -133,7 +133,7 @@ const InfoDriverDetail = () => {
               <img
                 src={
                   truck.image_path
-                    ? `http://localhost:5000/uploads/${truck.image_path}`
+                    ? `http://38.147.122.240:5000/uploads/${truck.image_path}`
                     : "https://via.placeholder.com/300"
                 }
                 alt="Truck"
