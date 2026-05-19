@@ -16,7 +16,7 @@ const InfoDriverDetail = () => {
       try {
         // Fetch truck details + checkpoints
         const resTruck = await fetch(
-          `http://localhost:5000/api/trucks/${encodeURIComponent(truckId)}/details`
+          `http://38.147.122.240:5000/api/trucks/${encodeURIComponent(truckId)}/details`
         );
         if (!resTruck.ok) throw new Error("Gagal mengambil data truck");
         const data = await resTruck.json();

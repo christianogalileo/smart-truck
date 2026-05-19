@@ -18,7 +18,7 @@ const TimbangMuat = () => {
   const fetchRFID = useCallback(async () => {
     try {
       setLoading(true);
-      const res = await axios.get('http://localhost:5000/api/rfid/latest');
+      const res = await axios.get('http://38.147.122.240:5000/api/rfid/latest');
       if (res.data.truck) {
         setRfid(res.data.truck.truckId);
         setTruck(res.data.truck);

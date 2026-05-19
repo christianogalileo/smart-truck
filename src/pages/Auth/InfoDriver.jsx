@@ -9,7 +9,7 @@ const InfoDriver = () => {
 
   // Ambil semua data truk
   const fetchTrucks = () => {
-    fetch("http://localhost:5000/api/trucks")
+    fetch("http://38.147.122.240:5000/api/trucks")
       .then((res) => res.json())
       .then((data) => {
         setTrucks(data);
@@ -21,7 +21,7 @@ const InfoDriver = () => {
   // Search berdasarkan plate number
   const fetchTruckBySearch = (plateNumber) => {
     const encodedPlate = encodeURIComponent(plateNumber);
-    fetch(`http://localhost:5000/api/trucks/search/${encodedPlate}`)
+    fetch(`http://38.147.122.240:5000/api/trucks/search/${encodedPlate}`)
       .then((res) => {
         if (res.status === 404) {
           setSelectedTruck(null);
