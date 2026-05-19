@@ -207,7 +207,7 @@ const EditTruck = () => {
                 className="mt-1 p-2 border border-gray-300 rounded w-full"
               />
               {form.existingImage && !form.image && (
-                <img src={`http://38.147.122.240:5000/uploads/${form.existingImage}`} alt="Truck Preview" className="mt-2 h-32 object-cover rounded" />
+                <img src={`/api/uploads/${form.existingImage}`} alt="Truck Preview" className="mt-2 h-32 object-cover rounded" />
               )}
             </div>
 

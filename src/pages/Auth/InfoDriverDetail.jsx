@@ -133,7 +133,7 @@ const InfoDriverDetail = () => {
               <img
                 src={
                   truck.image_path
-                    ? `http://38.147.122.240:5000/uploads/${truck.image_path}`
+                    ? `/api/uploads/${truck.image_path}`
                     : "https://via.placeholder.com/300"
                 }
                 alt="Truck"

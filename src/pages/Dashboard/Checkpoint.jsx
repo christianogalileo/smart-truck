@@ -6,7 +6,7 @@ const Checkpoint = ({ role }) => { // ← menerima role langsung
   const [checkpoints, setCheckpoints] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const apiUrl = 'http://38.147.122.240:5000';
+  const apiUrl = '/api';
 
   const fetchCheckpoints = async () => {
     try {

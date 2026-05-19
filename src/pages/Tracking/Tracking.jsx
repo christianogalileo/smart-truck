@@ -7,7 +7,7 @@ const Tracking = () => {
   const [selectedDate, setSelectedDate] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const apiUrl = 'http://38.147.122.240:5000';
+  const apiUrl = '/api';
 
   const mapStatusToValue = (status) => {
     switch (status) {
