@@ -11,7 +11,7 @@ const Checkpoint = ({ role }) => { // ← menerima role langsung
   const fetchCheckpoints = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`${apiUrl}/api/checkpoints`);
+      const res = await fetch(`${apiUrl}/checkpoints`);
       if (!res.ok) throw new Error("Failed to fetch data");
       let data = await res.json();
 
