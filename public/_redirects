@@ -1,1 +1,2 @@
 /api/* http://38.147.122.240:5000/api/:splat 200
+/uploads/* http://38.147.122.240:5000/uploads/:splat 200
