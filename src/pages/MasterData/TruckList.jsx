@@ -5,7 +5,7 @@ const TruckList = () => {
   const [trucks, setTrucks] = useState([]);
 
   useEffect(() => {
-    axios.get('http://38.147.122.240:5000/api/trucks')
+    axios.get('/api/trucks')
       .then(response => setTrucks(response.data))
       .catch(error => console.error("Gagal mengambil data trucks:", error));
   }, []);

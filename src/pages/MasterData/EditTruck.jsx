@@ -20,7 +20,7 @@ const EditTruck = () => {
   useEffect(() => {
     const fetchTruckData = async () => {
       try {
-        const res = await fetch(`http://38.147.122.240:5000/api/trucks/${truckId}`);
+        const res = await fetch(`/api/trucks/${truckId}`);
         const data = await res.json();
         if (res.ok) {
           setForm({
@@ -69,7 +69,7 @@ const EditTruck = () => {
     }
 
     try {
-      const res = await fetch(`http://38.147.122.240:5000/api/trucks/${truckId}`, {
+      const res = await fetch(`/api/trucks/${truckId}`, {
         method: 'PUT',
         body: formData,
       });

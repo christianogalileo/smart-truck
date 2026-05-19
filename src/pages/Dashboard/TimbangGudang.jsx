@@ -17,7 +17,7 @@ const TimbangGudang = () => {
   const fetchRFID = useCallback(async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://38.147.122.240:5000/api/rfid/latest");
+      const res = await axios.get("/api/rfid/latest");
       if (res.data.truck) {
         setRfid(res.data.truck.truckId);
         setTruck(res.data.truck);
@@ -46,7 +46,7 @@ const TimbangGudang = () => {
   const fetchTimbangMuat = async (truckId) => {
     try {
       const res = await axios.get(
-        `http://38.147.122.240:5000/api/loadings/${truckId}`
+        `/api/loadings/${truckId}`
       );
       setTimbangMuatList(res.data);
     } catch (err) {
@@ -74,7 +74,7 @@ const TimbangGudang = () => {
     try {
       setSubmitting(true);
       const res = await axios.put(
-        `http://38.147.122.240:5000/api/loadings/${id}/brutto`,
+        `/api/loadings/${id}/brutto`,
         { bruto: brutoVal }
       );
       alert(res.data.message || "Data brutto & netto berhasil disimpan!");
