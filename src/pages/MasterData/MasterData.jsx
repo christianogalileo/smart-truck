@@ -27,7 +27,7 @@ const MasterData = ({ role }) => { // ← sekarang menerima role langsung
     const interval = setInterval(async () => {
       if (isEditing) return;
       try {
-        const res = await fetch(`${apiUrl}/api/rfid/latest`);
+        const res = await fetch(`${apiUrl}/rfid/latest`);
         if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
         const data = await res.json();
 
@@ -71,7 +71,7 @@ const MasterData = ({ role }) => { // ← sekarang menerima role langsung
   // Fetch data trucks
   const fetchTrucks = async () => {
     try {
-      const res = await fetch(`${apiUrl}/api/trucks`);
+      const res = await fetch(`${apiUrl}/trucks`);
       const data = await res.json();
       if (res.ok) {
         setTrucks(data);
@@ -114,7 +114,7 @@ const MasterData = ({ role }) => { // ← sekarang menerima role langsung
     if (form.image) formData.append('image', form.image);
 
     try {
-      const res = await fetch(`${apiUrl}/api/trucks`, {
+      const res = await fetch(`${apiUrl}/trucks`, {
         method: 'POST',
         body: formData,
       });
@@ -138,7 +138,7 @@ const MasterData = ({ role }) => { // ← sekarang menerima role langsung
     if (!window.confirm('Are you sure you want to delete this truck?')) return;
 
     try {
-      const res = await fetch(`${apiUrl}/api/trucks/${truckId}`, { method: 'DELETE' });
+      const res = await fetch(`${apiUrl}trucks/${truckId}`, { method: 'DELETE' });
       const data = await res.json();
       if (res.ok) {
         alert('Truck successfully deleted!');

@@ -36,27 +36,42 @@
   });
 
   // ================= REGISTER ====================
-  app.post('/api/register', async (req, res) => { // ubah function jadi async
+  app.post('/api/register', (req, res) => {
   const { email, password, role } = req.body;
+
   if (!email || !password || !role) {
     return res.status(400).json({ message: 'Email, password, dan role wajib diisi' });
   }
 
   const checkEmail = 'SELECT * FROM users WHERE email = ?';
-  db.query(checkEmail, [email], async (err, results) => {
-    if (err) return res.status(500).json({ message: 'Gagal memeriksa email' });
-    if (results.length > 0) return res.status(400).json({ message: 'Email sudah terdaftar' });
 
-    try {
-      const hashedPassword = await bcrypt.hash(password, 10); // hash password
-      const insertUser = 'INSERT INTO users (email, password, role) VALUES (?, ?, ?)';
-      db.query(insertUser, [email, hashedPassword, role], (err) => {
-        if (err) return res.status(500).json({ message: 'Gagal registrasi user' });
-        res.status(201).json({ message: 'Registrasi berhasil' });
-      });
-    } catch (hashErr) {
-      res.status(500).json({ message: 'Gagal hash password', error: hashErr.message });
+  db.query(checkEmail, [email], (err, results) => {
+    if (err) {
+      console.error('DB Error check email:', err);
+      return res.status(500).json({ message: 'Gagal memeriksa email' });
     }
+
+    if (results.length > 0) {
+      return res.status(400).json({ message: 'Email sudah terdaftar' });
+    }
+
+    bcrypt.hash(password, 10, (hashErr, hashedPassword) => {
+      if (hashErr) {
+        console.error('Hash error:', hashErr);
+        return res.status(500).json({ message: 'Gagal hash password' });
+      }
+
+      const insertUser = 'INSERT INTO users (email, password, role) VALUES (?, ?, ?)';
+
+      db.query(insertUser, [email, hashedPassword, role], (err) => {
+        if (err) {
+          console.error('Insert user error:', err);
+          return res.status(500).json({ message: 'Gagal registrasi user' });
+        }
+
+        return res.status(201).json({ message: 'Registrasi berhasil' });
+      });
+    });
   });
 });
 
@@ -147,7 +162,7 @@ app.post('/api/login', async (req, res) => {
         plateNumber: truck.plateNumber,   // ✅ Tambahin ini
         status: truck.current_status || 'Unknown',
         date: truck.date,
-        image_url: truck.image_path ? `http://localhost:${PORT}/uploads/${truck.image_path}` : null
+        image_url: truck.image_path ? `/uploads/${truck.image_path}` : null
       }));
 
 
@@ -273,7 +288,7 @@ app.get('/api/export/truck/:truckId', exportExcelHandler);
         plateNumber: truck.plateNumber,   // ✅ tambahin
         status: truck.status,
         date: truck.date,
-        image_url: truck.image_path ? `http://localhost:${PORT}/uploads/${truck.image_path}` : null
+        image_url: truck.image_path ? `/uploads/${truck.image_path}` : null
       });
     });
   });
@@ -454,7 +469,7 @@ app.get('/api/export/truck/:truckId', exportExcelHandler);
                 plateNumber: truck.plateNumber, // ✅ plat nomor
                 status: truck.status,
                 date: truck.date,
-                image_url: truck.image_path ? `http://localhost:${PORT}/uploads/${truck.image_path}` : null
+                image_url: truck.image_path ? `/uploads/${truck.image_path}` : null
               }
             });
           }
@@ -608,7 +623,7 @@ app.get('/api/trucks/:truckId/details', (req, res) => {
         plateNumber: truck.plateNumber,   // ✅ tambahin
         status: truck.status,
         date: truck.date,
-        image_url: truck.image_path ? `http://localhost:${PORT}/uploads/${truck.image_path}` : null
+        image_url: truck.image_path ? `/uploads/${truck.image_path}` : null
       });
     });
   });
@@ -858,7 +873,7 @@ app.get("/api/trucks/search/:plateNumber", (req, res) => {
       status: truck.status || "Unknown",
       date: truck.date,
       image_url: truck.image_path
-        ? `http://localhost:${PORT}/uploads/${truck.image_path}`
+        ? `/uploads/${truck.image_path}`
         : null,
     }));
 
